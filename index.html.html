@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מבצע דגל המדינה - חדר בריחה</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* תכלת בהיר */
+            color: #003366; /* כחול כהה */
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+            border: 3px solid #0038b8; /* כחול דגל ישראל */
+        }
+        h1 {
+            color: #0038b8;
+            font-size: 28px;
+        }
+        p {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        input[type="text"] {
+            font-size: 20px;
+            padding: 10px;
+            width: 80%;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #0038b8;
+            color: white;
+            font-size: 20px;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #002277;
+        }
+        .hidden {
+            display: none;
+        }
+        .feedback {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d9534f; /* אדום לשגיאה */
+            margin-top: 15px;
+            min-height: 25px;
+        }
+        .success-text {
+            color: #28a745; /* ירוק להצלחה */
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    
+    <div id="intro">
+        <h1>מִבְצַע דֶּגֶל הַמְּדִינָה 🇮🇱</h1>
+        <p>שָׁלוֹם תַּלְמִידִים יְקָרִים!<br>
+        אֲנַחְנוּ בִּבְעָיָה גְּדוֹלָה. מַמָּשׁ עוֹד מְעַט מַתְחִיל טֶקֶס יוֹם הָעַצְמָאוּת, וְדֶגֶל יִשְׂרָאֵל הַגָּדוֹל נֶעֱלַם!<br>
+        מִישֶׁהוּ הֶחְבִּיא אוֹתוֹ וְהִשְׁאִיר לָנוּ 4 מְשִׂימוֹת סוֹדִיּוֹת. תַּעַזְרוּ לָנוּ?</p>
+        <button onclick="nextStation('intro', 'station1')">מוּכָנִים! בּוֹאוּ נַתְחִיל</button>
+    </div>
+
+    <div id="station1" class="hidden">
+        <h1>תַּחֲנָה 1: סִמְלֵי הַמְּדִינָה</h1>
+        <p>מֵאֵיזוֹ מִלָּה מֻרְכָּבוֹת הָאוֹתִיּוֹת הַבָּאוֹת: <br><strong>מ - ר - ו - נ - ה</strong> ?</p>
+        <input type="text" id="q1_answer" placeholder="הקלידו כאן את המילה">
+        <button onclick="checkAnswer('q1', 'מנורה', 'station1', 'station2')">בְּדִיקָה</button>
+        <div id="q1_feedback" class="feedback"></div>
+    </div>
+
+    <div id="station2" class="hidden">
+        <h1>תַּחֲנָה 2: הַמַּנְהִיגִים שֶׁלָּנוּ</h1>
+        <p>לִפְנֵי שָׁנִים רַבּוֹת, מַנְהִיג חָשׁוּב הִכְרִיז עַל הֲקָמַת מְדִינַת יִשְׂרָאֵל. מִי זֶה הָיָה?</p>
+        <div class="options">
+            <button onclick="checkMultipleChoice('q2', 'wrong', 'station2', 'station3')">בִּנְיָמִין זְאֵב הֶרְצְל</button>
+            <button onclick="checkMultipleChoice('q2', 'correct', 'station2', 'station3')">דָּוִד בֶּן גּוּרְיוֹן</button>
+            <button onclick="checkMultipleChoice('q2', 'wrong', 'station2', 'station3')">גּוֹלְדָּה מֵאִיר</button>
+        </div>
+        <div id="q2_feedback" class="feedback"></div>
+    </div>
+
+    <div id="station3" class="hidden">
+        <h1>תַּחֲנָה 3: גֵּאוֹגְרַפְיָה שֶׁל יִשְׂרָאֵל</h1>
+        <p>הַדֶּגֶל מֻחְבָּא בְּעִיר הַבִּירָה שֶׁל מְדִינַת יִשְׂרָאֵל. מָהִי עִיר הַבִּירָה שֶׁלָּנוּ?</p>
+        <div class="options">
+            <button onclick="checkMultipleChoice('q3', 'wrong', 'station3', 'station4')">תֵּל אָבִיב</button>
+            <button onclick="checkMultipleChoice('q3', 'wrong', 'station3', 'station4')">חֵיפָה</button>
+            <button onclick="checkMultipleChoice('q3', 'correct', 'station3', 'station4')">יְרוּשָׁלַיִם</button>
+        </div>
+        <div id="q3_feedback" class="feedback"></div>
+    </div>
+
+    <div id="station4" class="hidden">
+        <h1>תַּחֲנָה 4: קוֹד הַכַּסֶּפֶת</h1>
+        <p>הַקּוֹד לַכַּסֶּפֶת הוּא הַגִּיל שֶׁל הַמְּדִינָה הַשָּׁנָה.<br> יִשְׂרָאֵל הוּקְמָה בִּשְׁנַת 1948 וְהַיּוֹם אֲנַחְנוּ בִּשְׁנַת 2026. <br>בַּת כַּמָּה הַמְּדִינָה הַיּוֹם?</p>
+        <input type="text" id="q4_answer" placeholder="הקלידו מספר">
+        <button onclick="checkAnswer('q4', '78', 'station4', 'finish')">לִפְתֹּחַ אֶת הַכַּסֶּפֶת!</button>
+        <div id="q4_feedback" class="feedback"></div>
+    </div>
+
+    <div id="finish" class="hidden">
+        <h1>הֵידָד!!! הִצְלַחְתֶּם! 🎉</h1>
+        <p>פָּתַחְתֶּם אֶת הַכַּסֶּפֶת וְהַדֶּגֶל חָזַר אֵלֵינוּ מַמָּשׁ בַּזְּמַן לַטֶּקֶס.<br>תּוֹדָה רַבָּה לָכֶם, תַּלְמִידֵי כִּתָּה ג' הָאַלּוּפִים.</p>
+        <h2 style="color: #0038b8;">חַג עַצְמָאוּת שָׂמֵחַ! 🇮🇱</h2>
+    </div>
+
+</div>
+
+<script>
+    const encouragements = ["כָּל הַכָּבוֹד! אַתֶּם קְרוֹבִים לַדֶּגֶל!", "אַלּוּפִים! זֶה בְּדִיּוּק זֶה!", "מְצֻיָּן! מַמְשִׁיכִים הָלְאָה!", "קְלִי קַלּוּת לַחֲכָמִים כְּמוֹכֶם!"];
+
+    function nextStation(currentId, nextId) {
+        document.getElementById(currentId).classList.add('hidden');
+        document.getElementById(nextId).classList.remove('hidden');
+    }
+
+    function checkAnswer(qId, correctAnswer, currentStation, nextStationId) {
+        const userAnswer = document.getElementById(qId + "_answer").value.trim();
+        const feedbackDiv = document.getElementById(qId + "_feedback");
+        
+        if (userAnswer === correctAnswer) {
+            feedbackDiv.innerHTML = "<span class='success-text'>" + encouragements[Math.floor(Math.random() * encouragements.length)] + "</span>";
+            setTimeout(function() {
+                nextStation(currentStation, nextStationId);
+            }, 1500); // מעבר אוטומטי אחרי שנייה וחצי
+        } else {
+            feedbackDiv.innerText = "אופס, נסו שוב! לא נוותר עד שנמצא את הדגל.";
+        }
+    }
+
+    function checkMultipleChoice(qId, status, currentStation, nextStationId) {
+        const feedbackDiv = document.getElementById(qId + "_feedback");
+        
+        if (status === 'correct') {
+            feedbackDiv.innerHTML = "<span class='success-text'>" + encouragements[Math.floor(Math.random() * encouragements.length)] + "</span>";
+            setTimeout(function() {
+                nextStation(currentStation, nextStationId);
+            }, 1500);
+        } else {
+            feedbackDiv.innerText = "אופס, תשובה לא נכונה. נסו שוב!";
+        }
+    }
+</script>
+
+</body>
+</html>
